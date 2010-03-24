@@ -16,5 +16,15 @@
 
 (int (diff-sum-of-squares-square-of-sum (range 1 101)))
 
+;; version that uses clojure.contrib.math instead of the jdk Math.pow
+;; advantage of the following version is that it does not overflow for
+;; large numbers.
+(use 'clojure.contrib.math)
+
+(defn diff-sum-of-squares-square-of-sum2 [coll]
+  (- (expt (reduce + coll) 2)
+     (reduce + (map #(expt % 2) coll))))
+
+(int (diff-sum-of-squares-square-of-sum2 (range 1 101)))
 
 
