@@ -8,8 +8,16 @@
 ;; Find the product abc.
 (defn find-triplet []
   (first (for [a (range 1 1000)
-             b (range 1 1000)
-             c (range 1 1000)
-             :when (and (= 1000 (+ a b c))
-                        (= (* c c) (+ (* a a) (* b b))))]
-         (* a b c))))
+               b (range 1 1000)
+               c (range 1 1000)
+               :when (and (= 1000 (+ a b c))
+                          (= (* c c) (+ (* a a) (* b b))))]
+           (* a b c))))
+
+(defn find-triplet-fast [sum]
+  (first (for [a (range 1 (/ (- sum 3) 3))
+               b (range 1 (/ (- sum a) 2))
+               c (list (- sum a b))
+               :when (and (= 1000 (+ a b c))
+                          (= (* c c) (+ (* a a) (* b b))))]
+           (* a b c))))
