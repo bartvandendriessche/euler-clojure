@@ -7,12 +7,11 @@
         grid (partition width (map #(Integer. %) (.split gridstr " ")))
         grid-at (fn [[x y]]
                   (try (-> grid (nth x) (nth y))
-                       (catch IndexOutOfBoundsException ex 0)))
-        vec-add (fn [[a b] [c d]] [(+ a c) (+ b d)])]
+                       (catch IndexOutOfBoundsException ex 0)))]
     (reduce max (for [d directions
                       x0 (range height)
                       y0 (range width)]
-                  (reduce * (map grid-at (take 4 (iterate (partial vec-add d) [x0 y0]))))))))
+                  (reduce * (map grid-at (take 4 (iterate #(map + d %) [x0 y0]))))))))
 
 (euler11 nums)
 
